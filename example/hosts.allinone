@@ -47,7 +47,9 @@ PROXY_MODE="ipvs"
 SERVICE_CIDR="10.68.0.0/16"
 
 # Cluster CIDR (Pod CIDR), not overlap with node(host) networking
-CLUSTER_CIDR="172.20.0.0/16"
+CLUSTER_CIDR_V4="172.20.0.0/16"
+CLUSTER_CIDR_V6="2001:db8:1::/64"
+CLUSTER_CIDR="{{ CLUSTER_CIDR_V4 }},{{ CLUSTER_CIDR_V6 }}"
 
 # NodePort Range
 NODE_PORT_RANGE="30000-32767"

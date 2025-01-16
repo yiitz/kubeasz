@@ -31,6 +31,7 @@ ExecStart={{ bin_dir }}/kubelet \
   --hostname-override={{ K8S_NODENAME }} \
   --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \
   --root-dir={{ KUBELET_ROOT_DIR }} \
+  --node-ip={{ CLUSTER_CIDR }} \
   --v=2
 Restart=always
 RestartSec=5

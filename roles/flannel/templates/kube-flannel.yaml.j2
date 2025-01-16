@@ -81,7 +81,9 @@ data:
     }
   net-conf.json: |
     {
-      "Network": "{{ CLUSTER_CIDR }}",
+      "Network": "{{ CLUSTER_CIDR_V4 }}",
+      "EnableIPv6": true,
+      "IPv6Network": "{{ CLUSTER_CIDR_V6 }}",
       "Backend": {
 {% if FLANNEL_BACKEND == "vxlan" and DIRECT_ROUTING %}
         "DirectRouting": true,
@@ -190,6 +192,9 @@ spec:
           name: cni
         - mountPath: /etc/kube-flannel/
           name: flannel-cfg
+        - name: lib-modules
+          mountPath: /lib/modules
+          readOnly: true
       priorityClassName: system-node-critical
       serviceAccountName: flannel
       tolerations:
@@ -212,3 +217,7 @@ spec:
           path: /run/xtables.lock
           type: FileOrCreate
         name: xtables-lock
+      - name: lib-modules
+        hostPath:
+          path: /lib/modules
+          type: DirectoryOrCreate
